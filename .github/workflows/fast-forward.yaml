@@ -15,10 +15,9 @@ jobs:
 
     steps:
       - name: Fast forwarding
-        env:
-          GITHUB_TOKEN: abcdef
         uses: sequoia-pgp/fast-forward@v1
         with:
+          github_token: abcdef
           merge: true
           comment: always
 
