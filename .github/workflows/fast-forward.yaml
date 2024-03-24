@@ -1,0 +1,33 @@
+name: fast-forward
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  fast-forward:
+    if: ${{ contains(github.event.comment.body, '/fast-forward')
+      && github.event.issue.pull_request }}
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Fast forwarding
+        uses: sequoia-pgp/fast-forward@v1
+        with:
+          merge: true
+          comment: always
+
+  promote-image:
+    runs-on: ubuntu-latest
+    needs: [fast-forward]
+    timeout-minutes: 3
+
+    steps:
+      - name: Debug
+        run: |
+          PR_SHA=$(github_pull_request .head.sha)
+          echo $PR_SHA
+          echo $GH_SHA
