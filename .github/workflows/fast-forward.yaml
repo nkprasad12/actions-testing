@@ -15,19 +15,21 @@ jobs:
 
     steps:
       - name: Fast forwarding
+        env:
+          GITHUB_TOKEN: abcdef
         uses: sequoia-pgp/fast-forward@v1
         with:
           merge: true
           comment: always
 
-  promote-image:
-    runs-on: ubuntu-latest
-    needs: [fast-forward]
-    timeout-minutes: 3
+  # promote-image:
+  #   runs-on: ubuntu-latest
+  #   needs: [fast-forward]
+  #   timeout-minutes: 3
 
-    steps:
-      - name: Debug
-        run: |
-          PR_SHA=$(github_pull_request .head.sha)
-          echo $PR_SHA
-          echo $GH_SHA
+  #   steps:
+  #     - name: Debug
+  #       run: |
+  #         PR_SHA=$(github_pull_request .head.sha)
+  #         echo $PR_SHA
+  #         echo $GH_SHA
