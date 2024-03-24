@@ -17,7 +17,7 @@ jobs:
       - name: Fast forwarding
         uses: sequoia-pgp/fast-forward@v1
         with:
-          github_token: abcdef
+          github_token: {{ secrets.FF_GH_TOKEN }}
           merge: true
           comment: always
 
